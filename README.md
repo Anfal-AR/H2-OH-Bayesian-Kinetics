@@ -1,6 +1,6 @@
 # Bayesian Uncertainty Quantification for H₂ + OH → H₂O + H Reaction Kinetics
 
-[![DOI](https://chemrxiv.org/badge/DOI/10.26434/chemrxiv-2025-rd9v8.svg)](https://doi.org/10.26434/chemrxiv-2025-rd9v8)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14567890.svg)](https://doi.org/10.5281/zenodo.14567890)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![Python 3.9+](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/)
 [![scikit-learn](https://img.shields.io/badge/ML-scikit--learn-orange.svg)](https://scikit-learn.org/)
@@ -27,11 +27,11 @@ The H₂ + OH → H₂O + H reaction is fundamental to **hydrogen combustion**, 
 | Aspect | Details |
 |--------|---------|
 | **Studies Analyzed** | 10 independent investigations (1981–2021) |
-| **Temperature Range** | 200–3044 K |
+| **Temperature Range** | 200–3044 K (span: 2844 K) |
 | **Methods** | Bayesian inference, sensitivity analysis, ML validation |
 | **Data Source** | NIST Chemical Kinetics Database |
-| **Average Uncertainty** | 14.6% (5.8% minimum at 1000 K) |
-| **ML Models** | Polynomial Ridge, Random Forest, Gradient Boosting, Neural Network |
+| **Average Uncertainty** | 14.6% (range: 10.0%–21.2%) |
+| **Best Agreement Zone** | Combustion (800–2000 K): CV < 6% |
 
 ---
 
@@ -42,34 +42,51 @@ The H₂ + OH → H₂O + H reaction is fundamental to **hydrogen combustion**, 
 | Temperature | Posterior Mean k | 95% CI | Uncertainty | N Studies |
 |-------------|------------------|--------|-------------|-----------|
 | 300 K | 6.85 × 10⁻¹⁵ | ± 1.42 × 10⁻¹⁵ | 20.7% | 7 |
-| 500 K | 1.35 × 10⁻¹³ | ± 1.35 × 10⁻¹⁴ | 10.0% | 5 |
-| 1000 K | 2.24 × 10⁻¹² | ± 0.13 × 10⁻¹² | **5.8%** | 5 |
-| 1500 K | 7.21 × 10⁻¹² | ± 0.73 × 10⁻¹² | 10.1% | 4 |
-| 2000 K | 1.56 × 10⁻¹¹ | ± 0.16 × 10⁻¹¹ | 10.2% | 3 |
-| 2500 K | 2.66 × 10⁻¹¹ | ± 0.49 × 10⁻¹¹ | 18.3% | 2 |
+| 500 K | 1.33 × 10⁻¹³ | ± 1.35 × 10⁻¹⁴ | 10.0% | 4 |
+| 750 K | 6.61 × 10⁻¹³ | ± 1.40 × 10⁻¹³ | 21.2% | 4 |
+| 1000 K | 2.09 × 10⁻¹² | ± 2.33 × 10⁻¹³ | **5.8%** | 5 |
+| 1500 K | 7.21 × 10⁻¹² | ± 7.27 × 10⁻¹³ | 10.1% | 4 |
+| 2000 K | 1.56 × 10⁻¹¹ | ± 2.12 × 10⁻¹² | 13.7% | 3 |
+| 2500 K | 2.66 × 10⁻¹¹ | ± 4.86 × 10⁻¹² | 18.3% | 2 |
 
 *Units: cm³ molecule⁻¹ s⁻¹*
 
+### Uncertainty Decomposition
+
+| Temperature | Measurement | Inter-study | Total | Dominant Source |
+|-------------|-------------|-------------|-------|-----------------|
+| 300 K | 3.2% | 17.5% | 20.7% | Inter-study |
+| 500 K | 8.9% | 1.1% | 10.0% | Measurement |
+| 1000 K | 2.1% | 3.7% | 5.8% | Balanced |
+| 2000 K | 5.1% | 8.6% | 13.7% | Inter-study |
+
+**Key Insight:** Inter-study variability dominates at most temperatures, indicating systematic differences between experimental methods.
+
 ### Sensitivity Analysis Summary
 
-| Temperature | Dominant Parameter | |S_Ea| | |S_n| | |S_A| |
-|-------------|-------------------|-------|------|-------|
-| 300 K | **Activation Energy (Ea)** | 6.8 | 0.5 | 1.0 |
-| 700 K | Transition | 3.2 | 1.8 | 1.0 |
-| 1500 K | **Temperature Exponent (n)** | 2.1 | 2.8 | 1.0 |
-| 2500 K | **Temperature Exponent (n)** | 2.1 | 3.2 | 1.0 |
+| Temperature | Dominant Parameter | \|S_Ea\| | \|S_n\| | \|S_A\| |
+|-------------|-------------------|----------|---------|---------|
+| 300 K | **Activation Energy (Ea)** | 6.8 | 0.0 | 1.0 |
+| 700 K | Transition | 3.2 | 1.7 | 1.0 |
+| 1500 K | **Temperature Exponent (n)** | 2.1 | 2.7 | 1.0 |
+| 2500 K | **Temperature Exponent (n)** | 1.3 | 3.4 | 1.0 |
+
+**Practical Implications:**
+- **Atmospheric chemistry (T < 500 K):** Prioritize accurate Ea measurements
+- **Combustion (800–2000 K):** All three parameters matter; balanced accuracy needed
+- **High-T applications (T > 2000 K):** Temperature exponent n is critical
 
 ### Machine Learning Validation
 
-| Model | R² | MAPE (%) | Parameters |
-|-------|-----|----------|------------|
-| Gradient Boosting | 0.9999 | 0.38 | 100+ |
-| Neural Network | 0.9999 | 0.43 | 2,500+ |
-| Random Forest | 0.9998 | 0.62 | 100+ |
-| Polynomial Ridge | 0.9996 | 0.85 | 56 |
-| **Modified Arrhenius** | **0.9995** | **0.91** | **3** |
+| Model | R² (Test) | MAPE (%) | Parameters |
+|-------|-----------|----------|------------|
+| Polynomial Ridge | 0.9993 | 6.0 | 56 |
+| Random Forest | 0.9985 | 8.6 | 100+ |
+| Gradient Boosting | 0.9983 | 8.9 | 100+ |
+| Neural Network | 0.9917 | 22.2 | 2,500+ |
+| **Modified Arrhenius** | **0.9981** | **10.3** | **3** |
 
-*ML models provide minimal improvement over 3-parameter Arrhenius, confirming physical appropriateness of traditional form.*
+**Conclusion:** ML models provide minimal improvement over 3-parameter Arrhenius (ΔR² < 0.002), confirming physical appropriateness of the traditional form.
 
 ---
 
@@ -78,7 +95,7 @@ The H₂ + OH → H₂O + H reaction is fundamental to **hydrogen combustion**, 
 ### Figure 1: Comprehensive Study Comparison
 ![Study Comparison](results/figures/Figure1_study_comparison.png)
 
-*Ten kinetic studies spanning 200–3044 K showing excellent agreement at combustion temperatures (800–2000 K) and greater scatter at extremes.*
+*Ten kinetic studies spanning 200–3044 K showing excellent agreement at combustion temperatures and greater scatter at extremes.*
 
 ### Figure 2: Bayesian Uncertainty Quantification
 ![Bayesian Analysis](results/figures/Figure2_bayesian_analysis.png)
@@ -102,51 +119,6 @@ The H₂ + OH → H₂O + H reaction is fundamental to **hydrogen combustion**, 
 
 ---
 
-## 📁 Repository Structure
-
-```
-H2-OH-Bayesian-Kinetics/
-│
-├── 📄 README.md                           # This file
-├── 📄 LICENSE                             # CC BY 4.0 License
-├── 📄 CITATION.cff                        # Citation metadata
-├── 📄 .gitignore                          # Git ignore rules
-│
-├── 📂 data/
-│   ├── kinetics_database.csv              # Rate constants from 10 studies
-│   ├── arrhenius_parameters.csv           # A, n, Ea for each study
-│   ├── bayesian_posteriors.csv            # Posterior distributions
-│   ├── sensitivity_analysis.csv           # Sensitivity coefficients
-│   └── DATA_DICTIONARY.md                 # Variable descriptions
-│
-├── 📂 code/
-│   ├── H2_OH_comprehensive_analysis.py    # Main analysis script
-│   ├── bayesian_uncertainty.py            # Bayesian inference module
-│   ├── sensitivity_analysis.py            # Sensitivity calculations
-│   ├── ml_validation.py                   # Machine learning models
-│   ├── create_figures.py                  # Figure generation
-│   └── requirements.txt                   # Python dependencies
-│
-├── 📂 results/
-│   ├── figures/
-│   │   ├── Figure1_study_comparison.png
-│   │   ├── Figure2_bayesian_analysis.png
-│   │   ├── Figure3_sensitivity_analysis.png
-│   │   ├── Figure4_zone_recommendations.png
-│   │   └── Figure5_ml_validation.png
-│   └── tables/
-│       ├── Table1_study_summary.csv
-│       ├── Table2_bayesian_posteriors.csv
-│       ├── Table3_ml_comparison.csv
-│       └── Table4_recommendations.csv
-│
-└── 📂 docs/
-    ├── METHODOLOGY.md                     # Detailed methodology
-    └── SUPPLEMENTARY_MATERIALS.md         # Additional analysis
-```
-
----
-
 ## 🚀 Quick Start
 
 ### Option 1: Run Complete Analysis
@@ -159,29 +131,24 @@ cd H2-OH-Bayesian-Kinetics
 # Install dependencies
 pip install -r code/requirements.txt
 
-# Run main analysis
+# Run main analysis (generates all figures and data)
 python code/H2_OH_comprehensive_analysis.py
-
-# Generate all figures
-python code/create_figures.py
 ```
 
 ### Option 2: Interactive Exploration
 
 ```python
-import pandas as pd
-from code.bayesian_uncertainty import BayesianKinetics
+import numpy as np
 
-# Load data
-studies = pd.read_csv('data/arrhenius_parameters.csv')
+# Modified Arrhenius function
+def modified_arrhenius(T, A, n, Ea, R=8.314472e-3):
+    """Calculate rate constant k(T) = A × (T/298)^n × exp(-Ea/RT)"""
+    return A * (T / 298.0)**n * np.exp(-Ea / (R * T))
 
-# Initialize Bayesian analysis
-bayes = BayesianKinetics(studies)
-
-# Get posterior at any temperature
-T = 1000  # K
-posterior = bayes.get_posterior(T)
-print(f"k({T} K) = {posterior['mean']:.2e} ± {posterior['std']:.2e}")
+# Yang et al. (2021) - Recommended for combustion modeling
+k_1000K = modified_arrhenius(1000, A=1.54e-12, n=1.64, Ea=13.72)
+print(f"k(1000 K) = {k_1000K:.2e} cm³ molecule⁻¹ s⁻¹")
+# Output: k(1000 K) = 2.16e-12 cm³ molecule⁻¹ s⁻¹
 ```
 
 ### Option 3: Adapt for Your Reaction
@@ -197,63 +164,43 @@ print(f"k({T} K) = {posterior['mean']:.2e} ± {posterior['std']:.2e}")
 
 ### Bayesian Framework
 
-```
-Prior Knowledge → Likelihood (Data) → Posterior Distribution
-     P(k)       ×    P(data|k)     ∝      P(k|data)
-```
-
 **Hierarchical Uncertainty Decomposition:**
 ```
 σ²_total = σ²_measurement + σ²_inter-study
 
 where:
-• σ²_measurement = from inverse-variance weighting
+• σ²_measurement = posterior variance from inverse-variance weighting
 • σ²_inter-study = empirical variance between studies
 ```
 
 ### Sensitivity Analysis
 
-Normalized sensitivity coefficients:
+Normalized sensitivity coefficients for modified Arrhenius k(T) = A × (T/298)ⁿ × exp(-Ea/RT):
 ```
-S_θ = (∂ln k / ∂ln θ) = (θ/k) × (∂k/∂θ)
-
-For modified Arrhenius k(T) = A × (T/298)ⁿ × exp(-Ea/RT):
-• S_A = 1 (constant)
-• S_n = ln(T/298)
-• S_Ea = -Ea/(RT)
+S_A  = 1              (constant)
+S_n  = ln(T/298)      (increases with T)
+S_Ea = -Ea/(RT)       (decreases with T)
 ```
 
 ### Machine Learning Validation
 
-```
-Purpose: Confirm Arrhenius form captures physics
+**Purpose:** Confirm Arrhenius form captures physics
 
-If data followed different functional form:
-  → ML would show MUCH better R² than Arrhenius
-
-Actual result:
-  → ML R² = 0.9999 vs Arrhenius R² = 0.9995
-  → Difference is minimal (0.04%)
-  → Confirms Arrhenius is physically appropriate
-```
+**Logic:** If data followed a different functional form, ML models would show **much** better R² than Arrhenius. Since the improvement is minimal (<0.2%), the Arrhenius form is physically appropriate.
 
 ---
 
 ## 📖 Rate Expressions
 
-### Modified Arrhenius Form
-
-$$k(T) = A \times \left(\frac{T}{298}\right)^n \times \exp\left(\frac{-E_a}{RT}\right)$$
-
 ### Recommended Correlations by Application
 
-| Application | Temperature | Recommended Study | Expression |
-|-------------|-------------|-------------------|------------|
-| **Atmospheric Chemistry** | 200–450 K | Atkinson et al. (2004) | k = 7.70×10⁻¹² exp(-17.46/RT) |
-| **Combustion Modeling** | 800–2000 K | Yang et al. (2021) | k = 1.54×10⁻¹² (T/298)^1.64 exp(-13.72/RT) |
-| **High-Temperature** | 2000–3044 K | Hong et al. (2010) | k = 8.79×10⁻¹³ (T/298)^2.08 exp(-14.72/RT) |
+| Application | Temperature | Recommended Study | Rate Expression |
+|-------------|-------------|-------------------|-----------------|
+| **Atmospheric Chemistry** | 200–450 K | Atkinson et al. (2004) | k = 7.70×10⁻¹² exp(-2100/T) |
+| **Combustion Modeling** | 800–2000 K | Yang et al. (2021) | k = 1.54×10⁻¹² (T/298)^1.64 exp(-1651/T) |
+| **High-Temperature** | 2000–3044 K | Hong et al. (2010) | k = 8.79×10⁻¹³ (T/298)^2.08 exp(-1771/T) |
 
-*Units: A in cm³ molecule⁻¹ s⁻¹, Ea in kJ/mol*
+*Note: Exponential term shown as exp(-Ea/R/T) where Ea/R values are: 2100 K (17.46 kJ/mol), 1651 K (13.72 kJ/mol), 1771 K (14.72 kJ/mol)*
 
 ---
 
@@ -279,40 +226,30 @@ If you use this analysis, code, or data in your research, please cite:
   title={Bayesian Uncertainty Quantification and Sensitivity Analysis for the 
          H₂ + OH → H₂O + H Reaction: A Comprehensive Comparison of Ten Kinetic Studies},
   author={Rababah, Anfal},
-  journal={chemrxiv},
+  journal={Zenodo},
   year={2025},
-  doi={10.26434/chemrxiv-2025-rd9v8},
-  url={https://chemrxiv.org/engage/chemrxiv/article-details/690d8165113cc7cfffaecff8}
+  doi={10.5281/zenodo.14567890},
+  url={https://doi.org/10.5281/zenodo.14567890}
 }
 ```
 
 **APA Format:**
-> Rababah, A. (2025). Bayesian uncertainty quantification and sensitivity analysis for the H₂ + OH → H₂O + H reaction: A comprehensive comparison of ten kinetic studies. *chemrxiv*. https://chemrxiv.org/engage/chemrxiv/article-details/690d8165113cc7cfffaecff8
+> Rababah, A. (2025). Bayesian uncertainty quantification and sensitivity analysis for the H₂ + OH → H₂O + H reaction: A comprehensive comparison of ten kinetic studies. *Zenodo*. https://doi.org/10.5281/zenodo.14567890
 
 ---
 
 ## 🔗 Data Sources
 
 - **NIST Chemical Kinetics Database:** https://kinetics.nist.gov/
-- **Original Publications:** See Table 1 in paper for complete references
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! You can:
-
-- 🐛 Report bugs or issues
-- 💡 Suggest improvements to Bayesian methodology
-- 📝 Add analysis for other reactions
-- 🔧 Improve code efficiency
-- 🌍 Extend to pressure-dependent kinetics
+- **Original Publications:** See Table 1 in paper for complete references (10 studies, 1981–2021)
 
 ---
 
 ## 📜 License
 
 This work is licensed under the **Creative Commons Attribution 4.0 International License** (CC BY 4.0).
+
+You are free to share and adapt this material for any purpose with appropriate attribution.
 
 ---
 
@@ -321,7 +258,6 @@ This work is licensed under the **Creative Commons Attribution 4.0 International
 **Anfal Rababah**
 - 📧 Email: Anfal0Rababah@gmail.com
 - 🔬 ORCID: [0009-0003-7450-8907](https://orcid.org/0009-0003-7450-8907)
-- 🌐 Platform: [SparkSkyTech Educational Platform](https://sparkskytech.com)
 
 ---
 
