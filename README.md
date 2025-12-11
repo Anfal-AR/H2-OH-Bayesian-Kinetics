@@ -1,6 +1,6 @@
 # Bayesian Uncertainty Quantification for H₂ + OH → H₂O + H Reaction Kinetics
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14567890.svg)](https://doi.org/10.5281/zenodo.14567890)
+[![DOI](https://img.shields.io/badge/DOI-10.26434%2Fchemrxiv--2025--rd9v8-blue.svg)](https://doi.org/10.26434/chemrxiv-2025-rd9v8)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![Python 3.9+](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/)
 [![scikit-learn](https://img.shields.io/badge/ML-scikit--learn-orange.svg)](https://scikit-learn.org/)
@@ -226,15 +226,15 @@ If you use this analysis, code, or data in your research, please cite:
   title={Bayesian Uncertainty Quantification and Sensitivity Analysis for the 
          H₂ + OH → H₂O + H Reaction: A Comprehensive Comparison of Ten Kinetic Studies},
   author={Rababah, Anfal},
-  journal={Zenodo},
+  journal={ChemRxiv},
   year={2025},
-  doi={10.5281/zenodo.14567890},
-  url={https://doi.org/10.5281/zenodo.14567890}
+  doi={10.26434/chemrxiv-2025-rd9v8},
+  url={https://doi.org/10.26434/chemrxiv-2025-rd9v8}
 }
 ```
 
 **APA Format:**
-> Rababah, A. (2025). Bayesian uncertainty quantification and sensitivity analysis for the H₂ + OH → H₂O + H reaction: A comprehensive comparison of ten kinetic studies. *Zenodo*. https://doi.org/10.5281/zenodo.14567890
+> Rababah, A. (2025). Bayesian uncertainty quantification and sensitivity analysis for the H₂ + OH → H₂O + H reaction: A comprehensive comparison of ten kinetic studies. *ChemRxiv*. https://doi.org/10.26434/chemrxiv-2025-rd9v8
 
 ---
 
