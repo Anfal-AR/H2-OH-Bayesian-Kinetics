@@ -1,0 +1,57 @@
+cff-version: 1.2.0
+title: >-
+  Bayesian Uncertainty Quantification and Sensitivity Analysis for the 
+  H₂ + OH → H₂O + H Reaction: A Comprehensive Comparison of Ten Kinetic Studies
+message: >-
+  If you use this analysis, code, or data, please cite it using 
+  the metadata from this file.
+type: software
+authors:
+  - family-names: Rababah
+    given-names: Anfal
+    email: Anfal0Rababah@gmail.com
+    orcid: 'https://orcid.org/0009-0003-7450-8907'
+identifiers:
+  - type: doi
+    value: 10.26434/chemrxiv-2025-rd9v8
+    description: ChemRxiv DOI
+repository-code: 'https://github.com/Anfal-AR/H2-OH-Bayesian-Kinetics'
+url: 'https://chemrxiv.org/engage/chemrxiv/article-details/690d8165113cc7cfffaecff8'
+abstract: >-
+  Comprehensive Bayesian uncertainty quantification and sensitivity analysis 
+  for the H₂ + OH → H₂O + H reaction based on ten independent kinetic studies 
+  (1981-2021) spanning 200-3044 K. The analysis reveals 14.6% average uncertainty 
+  with minimum 5.8% at combustion temperatures. Sensitivity analysis shows 
+  activation energy dominates at low temperatures while temperature exponent 
+  becomes critical above 1500 K. Machine learning validation confirms modified 
+  Arrhenius expressions remain optimal. Application-specific recommendations 
+  are provided for atmospheric chemistry, combustion modeling, and 
+  high-temperature applications.
+keywords:
+  - Chemical kinetics
+  - Bayesian analysis
+  - Uncertainty quantification
+  - Sensitivity analysis
+  - Hydrogen combustion
+  - Arrhenius equation
+  - Machine learning
+  - Rate constant
+  - NIST database
+  - Open science
+license: CC-BY-4.0
+version: '1.0'
+date-released: '2025-01-01'
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Rababah
+      given-names: Anfal
+      email: Anfal0Rababah@gmail.com
+      orcid: 'https://orcid.org/0009-0003-7450-8907'
+  title: >-
+    Bayesian Uncertainty Quantification and Sensitivity Analysis for the 
+    H₂ + OH → H₂O + H Reaction: A Comprehensive Comparison of Ten Kinetic Studies
+  year: 2025
+  doi: 10.26434/chemrxiv-2025-rd9v8
+  url: 'https://chemrxiv.org/engage/chemrxiv/article-details/690d8165113cc7cfffaecff8'
+  journal: Zenodo

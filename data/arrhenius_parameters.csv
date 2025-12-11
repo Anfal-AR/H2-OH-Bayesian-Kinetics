@@ -1,0 +1,11 @@
+Study,Year,T_min,T_max,A,n,Ea,Method,Uncertainty,Priority
+Yang2021,2021,300,2500,1.54e-12,1.64,13.72,Review/Statistical,15.0,High
+Varga2016,2016,800,2500,9.79e-13,1.88,13.19,Shock tube,20.0,High
+Hong2010,2010,1014,3044,8.79e-13,2.08,14.72,Shock tube,25.0,High
+Atkinson2004,2004,200,450,7.7e-12,0.0,17.46,Review,15.0,Medium
+Baulch1992,1992,300,2500,1.55e-12,1.6,13.8,Review,20.0,High
+Old1992,1992,250,2580,2.06e-12,1.52,14.47,Shock tube,25.0,High
+Sutherland1996,1996,298,820,6.86e-12,0.0,16.32,Laser photolysis,20.0,Medium
+Demissy1997,1997,200,300,5.5e-12,0.0,16.63,Flash photolysis,30.0,Low
+Pirraglia1989,1989,297,417,6.92e-12,0.0,16.85,Laser-induced fluorescence,25.0,Medium
+Ravishankara1981,1981,250,420,7.35e-12,0.0,17.12,Flash photolysis-RF,30.0,Low
